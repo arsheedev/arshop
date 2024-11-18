@@ -1,29 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { products } from './products'
+	import type { PageData } from './$types'
 
-	type Product = {
-		id: number
-		title: string
-		price: string
-		category: string
-		description: string
-	}
-
-	export let params: { id: string }
-	let product: Product | undefined
-
-	onMount(() => {
-		product = products.find((p) => p.id === parseInt(params.id))
-	})
+	let { data }: { data: PageData } = $props()
 </script>
 
-{#if product}
+{#if data.product}
 	<div class="detail-container">
-		<h1 class="product-title">{product.title}</h1>
+		<h1 class="product-title">{data.product.title}</h1>
 		<div class="product-image"></div>
-		<p class="product-description">{product.description}</p>
-		<p class="product-price">Harga: {product.price}</p>
+		<p class="product-description">{data.product.description}</p>
+		<p class="product-price">Harga: {data.product.price}</p>
 	</div>
 {:else}
 	<p>Produk tidak ditemukan!</p>

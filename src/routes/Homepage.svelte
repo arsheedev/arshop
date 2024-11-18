@@ -1,5 +1,5 @@
 <script lang="ts">
-	import image from './../../assets/image-gusdur.png'
+	import image from '$lib/assets/image-gusdur.png'
 </script>
 
 <section class="home bg-orange-50">

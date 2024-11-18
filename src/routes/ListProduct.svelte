@@ -1,19 +1,19 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button'
+	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
-	import { Button } from '../../lib/components/ui/button'
-	import { products } from './products'
 
-	let currentPage = 1
 	const itemsPerPage = 12
 	const totalPages = Math.ceil(products.length / itemsPerPage)
+
+	let currentPage = $state(1)
 
 	function goToPage(page: number) {
 		currentPage = page
 	}
 
-	$: displayedProducts = products.slice(
-		(currentPage - 1) * itemsPerPage,
-		currentPage * itemsPerPage
+	let displayedProducts = $derived(
+		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 	)
 </script>
 
@@ -40,7 +40,7 @@
 
 	<div class="pagination">
 		{#each Array(totalPages) as _, index}
-			<button class:active={currentPage === index + 1} on:click={() => goToPage(index + 1)}>
+			<button class:active={currentPage === index + 1} onclick={() => goToPage(index + 1)}>
 				{index + 1}
 			</button>
 		{/each}
