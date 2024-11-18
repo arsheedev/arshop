@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      lucide-svelte:
-        specifier: ^0.456.0
-        version: 0.456.0(svelte@5.1.16)
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -42,6 +38,9 @@ importers:
       globals:
         specifier: ^15.0.0
         version: 15.12.0
+      lucide-svelte:
+        specifier: ^0.456.0
+        version: 0.456.0(svelte@5.1.16)
       prettier:
         specifier: ^3.3.2
         version: 3.3.3
