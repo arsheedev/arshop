@@ -1,25 +1,7 @@
 <script lang="ts">
 	import { ShoppingCart } from 'lucide-svelte'
-	import { Button } from '../ui/button'
-	import { goto } from '$app/navigation'
-
-	const products = [
-		{ id: 1, title: 'Produk 1', price: 'Rp 100.000', category: 'Kategori A' },
-		{ id: 2, title: 'Produk 2', price: 'Rp 150.000', category: 'Kategori B' },
-		{ id: 3, title: 'Produk 3', price: 'Rp 200.000', category: 'Kategori C' },
-		{ id: 4, title: 'Produk 4', price: 'Rp 250.000', category: 'Kategori A' },
-		{ id: 5, title: 'Produk 5', price: 'Rp 300.000', category: 'Kategori B' },
-		{ id: 6, title: 'Produk 6', price: 'Rp 350.000', category: 'Kategori C' },
-		{ id: 7, title: 'Produk 7', price: 'Rp 400.000', category: 'Kategori A' },
-		{ id: 8, title: 'Produk 8', price: 'Rp 450.000', category: 'Kategori B' },
-		{ id: 9, title: 'Produk 9', price: 'Rp 500.000', category: 'Kategori C' },
-		{ id: 10, title: 'Produk 10', price: 'Rp 550.000', category: 'Kategori A' },
-		{ id: 11, title: 'Produk 11', price: 'Rp 600.000', category: 'Kategori B' },
-		{ id: 12, title: 'Produk 12', price: 'Rp 650.000', category: 'Kategori C' },
-		{ id: 13, title: 'Produk 13', price: 'Rp 700.000', category: 'Kategori A' },
-		{ id: 14, title: 'Produk 14', price: 'Rp 750.000', category: 'Kategori B' },
-		{ id: 15, title: 'Produk 15', price: 'Rp 800.000', category: 'Kategori C' }
-	]
+	import { Button } from '../../lib/components/ui/button'
+	import { products } from './products'
 
 	let currentPage = 1
 	const itemsPerPage = 12
@@ -43,7 +25,7 @@
 
 	<div class="product-grid">
 		{#each displayedProducts as product}
-			<div class="card">
+			<a class="card" href={`/product/${product.id}`}>
 				<div class="placeholder-image">
 					<div class="cart-icon">
 						<ShoppingCart size="20" color="#333" />
@@ -52,7 +34,7 @@
 				<div class="product-title">{product.title}</div>
 				<div class="product-price">{product.price}</div>
 				<div class="product-category">{product.category}</div>
-			</div>
+			</a>
 		{/each}
 	</div>
 
