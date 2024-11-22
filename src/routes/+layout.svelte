@@ -10,7 +10,7 @@
 
 <nav class="navbar bg-green-700">
 	<div class="navbar-content">
-		<div class="center-text">Archshopaja</div>
+		<div class="center-text">Arshop</div>
 	</div>
 </nav>
 

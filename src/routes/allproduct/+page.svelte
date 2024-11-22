@@ -1,16 +1,10 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button'
 	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
 
 	const itemsPerPage = 12
-	const totalPages = Math.ceil(products.length / itemsPerPage)
 
 	let currentPage = $state(1)
-
-	function goToPage(page: number) {
-		currentPage = page
-	}
 
 	let displayedProducts = $derived(
 		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -20,7 +14,6 @@
 <div class="container">
 	<div class="header">
 		<div class="title">Oleh-Oleh untuk Anda</div>
-		<Button class="bg-green-700 hover:bg-green-800" href="/allproduct">Lihat Semua Produk</Button>
 	</div>
 
 	<div class="product-grid">
@@ -35,14 +28,6 @@
 				<div class="product-price">{product.price}</div>
 				<div class="product-category">{product.category}</div>
 			</a>
-		{/each}
-	</div>
-
-	<div class="pagination">
-		{#each Array(totalPages) as _, index}
-			<button class:active={currentPage === index + 1} onclick={() => goToPage(index + 1)}>
-				{index + 1}
-			</button>
 		{/each}
 	</div>
 </div>
@@ -135,37 +120,6 @@
 		font-size: 14px;
 		color: #888;
 		margin-bottom: 10px;
-	}
-
-	.pagination {
-		display: flex;
-		gap: 10px;
-		justify-content: center;
-		margin-top: 20px;
-	}
-
-	.pagination button {
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		border: none;
-		background-color: #f0f0f0;
-		color: #333;
-		font-size: 16px;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.pagination button:hover {
-		background-color: #38a169;
-		color: #fff;
-	}
-
-	.pagination button.active {
-		background-color: #38a169;
-		color: #fff;
 	}
 
 	@media (max-width: 1024px) {

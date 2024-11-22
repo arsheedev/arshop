@@ -48,6 +48,12 @@
 					<Slash />
 				</Breadcrumb.Separator>
 				<Breadcrumb.Item>
+					<Breadcrumb.Link href="/allproduct">Semua Produk</Breadcrumb.Link>
+				</Breadcrumb.Item>
+				<Breadcrumb.Separator>
+					<Slash />
+				</Breadcrumb.Separator>
+				<Breadcrumb.Item>
 					<Breadcrumb.Link>{data.product.title}</Breadcrumb.Link>
 				</Breadcrumb.Item>
 			</Breadcrumb.List>
