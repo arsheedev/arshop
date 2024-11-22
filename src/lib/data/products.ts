@@ -1,108 +1,58 @@
+import produk1 from '$lib/assets/produk1.jpg'
+import produk2 from '$lib/assets/produk2.jpg'
+import produk3 from '$lib/assets/produk3.jpg'
+import produk4 from '$lib/assets/produk4.jpg'
+import produk5 from '$lib/assets/produk5.jpg'
+import produk6 from '$lib/assets/produk6.jpg'
+
 export const products = [
 	{
 		id: 1,
-		title: 'Produk 1',
-		price: 'Rp 100.000',
-		category: 'Kategori A',
+		title: 'Semua Jajanan',
+		price: 'Variasi',
+		category: 'Jajanan',
 		description:
-			'Produk 1 adalah barang berkualitas tinggi dari Kategori A, cocok untuk kebutuhan sehari-hari.'
+			'Ini adalah product jajanan yang bisa request jadi untuk pemesanan yang bebas bisa berada disini.',
+		image: produk1
 	},
 	{
 		id: 2,
-		title: 'Produk 2',
-		price: 'Rp 150.000',
-		category: 'Kategori B',
-		description: 'Produk 2 memberikan nilai lebih dengan desain elegan dari Kategori B.'
+		title: 'Brem',
+		price: 'Rp 30.000',
+		category: 'Jajanan',
+		description: 'Brem adalah jajanan khas madiun yang disediakan di oleh oleh gusdur',
+		image: produk2
 	},
 	{
 		id: 3,
-		title: 'Produk 3',
-		price: 'Rp 200.000',
-		category: 'Kategori C',
-		description: 'Produk 3 menawarkan kenyamanan maksimal, pilihan terbaik dari Kategori C.'
+		title: 'Oleh Oleh Putri Ayu',
+		price: 'Rp 20.000',
+		category: 'Jajanan',
+		description: 'Original crispy dari oleh oleh gusdur.',
+		image: produk3
 	},
 	{
 		id: 4,
 		title: 'Produk 4',
 		price: 'Rp 250.000',
-		category: 'Kategori A',
-		description: 'Produk 4 adalah pilihan ekonomis dengan kualitas premium dari Kategori A.'
+		category: 'Jajanan',
+		description: 'Produk 4 adalah pilihan ekonomis dengan kualitas premium dari kategori jajanan.',
+		image: produk4
 	},
 	{
 		id: 5,
 		title: 'Produk 5',
 		price: 'Rp 300.000',
-		category: 'Kategori B',
-		description: 'Produk 5 dibuat dengan material berkualitas tinggi dari Kategori B.'
+		category: 'Jajanan',
+		description: 'Produk 5 dibuat dengan material berkualitas tinggi dari kategori jajanan.',
+		image: produk5
 	},
 	{
 		id: 6,
 		title: 'Produk 6',
 		price: 'Rp 350.000',
-		category: 'Kategori C',
-		description: 'Produk 6 hadir dengan fitur canggih dari Kategori C.'
-	},
-	{
-		id: 7,
-		title: 'Produk 7',
-		price: 'Rp 400.000',
-		category: 'Kategori A',
-		description: 'Produk 7 adalah solusi modern untuk kebutuhan Anda dari Kategori A.'
-	},
-	{
-		id: 8,
-		title: 'Produk 8',
-		price: 'Rp 450.000',
-		category: 'Kategori B',
-		description: 'Produk 8 menonjolkan keindahan dan daya tahan dari Kategori B.'
-	},
-	{
-		id: 9,
-		title: 'Produk 9',
-		price: 'Rp 500.000',
-		category: 'Kategori C',
-		description: 'Produk 9 menawarkan pengalaman luar biasa dari Kategori C.'
-	},
-	{
-		id: 10,
-		title: 'Produk 10',
-		price: 'Rp 550.000',
-		category: 'Kategori A',
-		description: 'Produk 10 adalah produk unggulan dengan harga kompetitif dari Kategori A.'
-	},
-	{
-		id: 11,
-		title: 'Produk 11',
-		price: 'Rp 600.000',
-		category: 'Kategori B',
-		description: 'Produk 11 hadir dengan kualitas tak tertandingi dari Kategori B.'
-	},
-	{
-		id: 12,
-		title: 'Produk 12',
-		price: 'Rp 650.000',
-		category: 'Kategori C',
-		description: 'Produk 12 memberikan kenyamanan terbaik dari Kategori C.'
-	},
-	{
-		id: 13,
-		title: 'Produk 13',
-		price: 'Rp 700.000',
-		category: 'Kategori A',
-		description: 'Produk 13 adalah pilihan ideal untuk berbagai kebutuhan dari Kategori A.'
-	},
-	{
-		id: 14,
-		title: 'Produk 14',
-		price: 'Rp 750.000',
-		category: 'Kategori B',
-		description: 'Produk 14 dirancang dengan inovasi terbaru dari Kategori B.'
-	},
-	{
-		id: 15,
-		title: 'Produk 15',
-		price: 'Rp 800.000',
-		category: 'Kategori C',
-		description: 'Produk 15 adalah investasi terbaik untuk kebutuhan premium dari Kategori C.'
+		category: 'Jajanan',
+		description: 'Produk 6 hadir dengan fitur canggih dari kategori jajanan.',
+		image: produk6
 	}
 ]

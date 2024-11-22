@@ -10,7 +10,7 @@
 	let reviews = [
 		{
 			id: 1,
-			name: 'Gus Dur',
+			name: 'Afandika',
 			avatar: User,
 			comment:
 				'Oleh-oleh jajanan dan makanan dari Gus Dur selalu menjadi pilihan utama! Kualitasnya sangat terjaga, dan rasanya luar biasa. Pasti kembali lagi untuk membeli!',
@@ -61,8 +61,9 @@
 
 		<div class="product-details">
 			<div class="product-image">
-				<div class="image-placeholder"></div>
+				<img src={data.product.image} alt={data.product.title} class="product-image-element" />
 			</div>
+
 			<div class="product-info">
 				<h1 class="product-title">{data.product.title}</h1>
 				<p class="product-description">{data.product.description}</p>
@@ -129,7 +130,8 @@
 			<div class="product-grid">
 				{#each recommendedProducts as product}
 					<a class="card" href={`/product/${product.id}`}>
-						<div class="placeholder-image">
+						<div class="image-wrapper">
+							<img src={product.image} alt={product.title} class="product-image" />
 							<div class="cart-icon">
 								<ShoppingCart size="20" color="#333" />
 							</div>
@@ -173,13 +175,12 @@
 		align-items: center;
 	}
 
-	.image-placeholder {
-		display: block;
-		width: 600px;
-		height: 600px;
-		background-color: #ddd;
+	.product-image-element {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		max-width: 600px;
 		border-radius: 8px;
-		box-sizing: border-box;
 	}
 
 	.product-info {
@@ -197,6 +198,21 @@
 		font-weight: 600;
 		color: #555;
 		margin-bottom: 10px;
+	}
+	.image-wrapper {
+		width: 100%;
+		height: 250px;
+		background-color: #ddd;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.product-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.divider {
@@ -407,12 +423,6 @@
 			gap: 30px;
 		}
 
-		.image-placeholder {
-			width: 100%;
-			height: auto;
-			max-width: 500px;
-			margin: 0 auto;
-		}
 		.product-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
@@ -447,10 +457,6 @@
 	}
 
 	@media (max-width: 480px) {
-		.image-placeholder {
-			max-width: 100%;
-		}
-
 		.product-title {
 			font-size: 20px;
 		}

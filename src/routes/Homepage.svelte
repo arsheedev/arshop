@@ -1,8 +1,10 @@
 <script lang="ts">
 	import image from '$lib/assets/image-gusdur.png'
+	import bg from '$lib/assets/homepage-kawasan.webp'
 </script>
 
-<section class="home bg-orange-50">
+<section class="home">
+	<img class="background-image" src={bg} alt="Background" />
 	<div class="content">
 		<div class="image-side">
 			<img src={image} alt="" />
@@ -20,6 +22,7 @@
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 	.home {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -28,9 +31,33 @@
 		border-radius: 15px;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		padding: 10px;
-		position: relative;
 		margin: 10px;
 		font-family: 'Poppins', sans-serif;
+		overflow: hidden; /* Pastikan elemen tidak meluber */
+	}
+
+	/* Background Image */
+	.background-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		z-index: -2; /* Di bawah pseudo-element */
+	}
+
+	/* Overlay Layer */
+	.home::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7); /* Lapisan hitam lebih gelap */
+		z-index: -1; /* Di atas background tetapi di bawah konten */
 	}
 
 	.content {

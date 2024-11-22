@@ -26,7 +26,8 @@
 	<div class="product-grid">
 		{#each displayedProducts as product}
 			<a class="card" href={`/product/${product.id}`}>
-				<div class="placeholder-image">
+				<div class="image-wrapper">
+					<img src={product.image} alt={product.title} class="product-image" />
 					<div class="cart-icon">
 						<ShoppingCart size="20" color="#333" />
 					</div>
@@ -97,13 +98,20 @@
 		cursor: pointer;
 	}
 
-	.placeholder-image {
+	.image-wrapper {
 		width: 100%;
 		height: 250px;
 		background-color: #ddd;
 		border-radius: 5px;
 		margin-bottom: 10px;
 		position: relative;
+		overflow: hidden;
+	}
+
+	.product-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.cart-icon {

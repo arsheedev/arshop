@@ -1,5 +1,6 @@
 <script>
 	import '../app.css'
+	import { MapPin } from 'lucide-svelte' // Mengimpor ikon MapPin dari Lucide Svelte
 	let { children } = $props()
 	let isMenuOpen = false
 
@@ -10,7 +11,15 @@
 
 <nav class="navbar bg-green-700">
 	<div class="navbar-content">
-		<div class="center-text">Arshop</div>
+		<div class="logo">
+			<span class="center-text">Archshop</span>
+		</div>
+		<div class="nav-links">
+			<a href="https://maps.app.goo.gl/kgx5chvb7YufQcsM9" class="nav-link">
+				<MapPin class="icon" /> Lokasi
+			</a>
+			<a href="/allproducts" class="nav-link">All Product</a>
+		</div>
 	</div>
 </nav>
 
@@ -40,8 +49,11 @@
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 	.navbar {
-		padding: 10px 0;
+		position: sticky;
+		top: 0;
 		width: 100%;
+		z-index: 1000; /* Pastikan navbar tetap di atas konten lain */
+		padding: 10px 0;
 		font-family: 'Poppins', sans-serif;
 	}
 
@@ -54,12 +66,34 @@
 		padding: 0 20px;
 	}
 
-	.center-text {
+	.logo {
 		flex-grow: 1;
-		text-align: center;
+	}
+
+	.center-text {
+		text-align: left;
 		color: white;
 		font-size: 1.5rem;
 		font-weight: 600;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 20px;
+	}
+
+	.nav-link {
+		color: white;
+		text-decoration: none;
+		font-size: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		transition: color 0.3s ease;
+	}
+
+	.nav-link:hover {
+		color: #2f855a;
 	}
 
 	.footer {
@@ -102,6 +136,19 @@
 		.navbar-content {
 			flex-direction: column;
 			align-items: flex-start;
+		}
+
+		.nav-links {
+			width: 100%;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+		}
+
+		.nav-link {
+			width: 100%;
+			padding: 10px 0;
+			text-align: left;
 		}
 
 		.footer-content {
