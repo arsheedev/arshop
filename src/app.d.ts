@@ -5,9 +5,22 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface PageState {}
+		interface PageState {
+			ProductPage: {
+				product:
+					| {
+							id: number
+							title: string
+							price: string
+							category: string
+							description: string
+							image: string
+					  }
+					| undefined
+			}
+		}
 		// interface Platform {}
 	}
 }
 
-export {};
+export {}

@@ -1,20 +1,48 @@
 <script lang="ts">
+	import { goto, preloadData, pushState } from '$app/navigation'
+	import { page } from '$app/stores'
 	import { Button } from '$lib/components/ui/button'
+	import * as Dialog from '$lib/components/ui/dialog'
 	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
+	import Product from './product/[id]/+page.svelte'
 
 	const itemsPerPage = 12
 	const totalPages = Math.ceil(products.length / itemsPerPage)
 
 	let currentPage = $state(1)
+	let productDialogOpen = $state(false)
 
 	function goToPage(page: number) {
 		currentPage = page
 	}
 
+	async function onProductClick(e: MouseEvent & { currentTarget: HTMLAnchorElement }) {
+		if (e.metaKey || e.ctrlKey) return
+		e.preventDefault()
+
+		const { href } = e.currentTarget
+
+		const result = await preloadData(href)
+
+		if (result.type === 'loaded' && result.status === 200) {
+			pushState(href, { ProductPage: result.data as typeof $page.state.ProductPage })
+		} else {
+			goto(href)
+		}
+	}
+
 	let displayedProducts = $derived(
 		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 	)
+
+	$effect(() => {
+		if ($page.state.ProductPage) {
+			productDialogOpen = true
+		} else {
+			productDialogOpen = false
+		}
+	})
 </script>
 
 <div class="container">
@@ -25,7 +53,7 @@
 
 	<div class="product-grid">
 		{#each displayedProducts as product}
-			<a class="card" href={`/product/${product.id}`}>
+			<a class="card" href={`/product/${product.id}`} onclick={onProductClick}>
 				<div class="image-wrapper">
 					<img src={product.image} alt={product.title} class="product-image" />
 					<div class="cart-icon">
@@ -47,6 +75,14 @@
 		{/each}
 	</div>
 </div>
+
+<Dialog.Root open={productDialogOpen}>
+	<Dialog.Content>
+		<Product data={$page.state.ProductPage} />
+	</Dialog.Content>
+</Dialog.Root>
+
+<pre>{JSON.stringify($page.state.ProductPage, null, 2)}</pre>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
