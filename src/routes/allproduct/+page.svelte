@@ -1,21 +1,19 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button'
 	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
 
 	const itemsPerPage = 12
-	const totalPages = Math.ceil(products.length / itemsPerPage)
 
 	let currentPage = $state(1)
-
-	function goToPage(page: number) {
-		currentPage = page
-	}
 
 	let displayedProducts = $derived(
 		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 	)
 </script>
+
+<svelte:head>
+	<title>Semua Produk | Archshop</title>
+</svelte:head>
 
 <div class="container">
 	<div class="header">

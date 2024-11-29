@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { PageData } from './$types'
-	import { Truck, Box, Shield, User, Star } from 'lucide-svelte'
-	import Slash from 'lucide-svelte/icons/slash'
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb'
 	import { products } from '$lib/data/products'
-	import { ShoppingCart } from 'lucide-svelte'
+	import { Box, Shield, ShoppingCart, Star, Truck, User } from 'lucide-svelte'
+	import Slash from 'lucide-svelte/icons/slash'
+	import type { PageData } from './$types'
 
 	let { data }: { data: PageData } = $props()
+
 	let reviews = [
 		{
 			id: 1,
@@ -36,6 +36,10 @@
 
 	let recommendedProducts = products.slice(0, 4)
 </script>
+
+<svelte:head>
+	<title>{data.product?.title} | Archshop</title>
+</svelte:head>
 
 {#if data.product}
 	<div class="detail-container">

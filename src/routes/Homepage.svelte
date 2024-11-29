@@ -1,6 +1,6 @@
 <script lang="ts">
-	import image from '$lib/assets/image-gusdur.png'
 	import bg from '$lib/assets/homepage-kawasan.webp'
+	import image from '$lib/assets/image-gusdur.png'
 </script>
 
 <section class="home">
@@ -11,9 +11,9 @@
 		</div>
 		<div class="text-side">
 			<h1 class="title text-green-700">
-				Oleh Oleh,<br /> Dari Gus Dur
+				Aneka Camilan,<br /> Dari Gus Dur
 			</h1>
-			<button class="buy-now-button">Beli Sekarang</button>
+			<a href="/allproduct" class="buy-now-button text-center">Beli Sekarang</a>
 		</div>
 	</div>
 </section>

@@ -3,5 +3,9 @@
 	import ListProduct from './ListProduct.svelte'
 </script>
 
+<svelte:head>
+	<title>Homepage | Archshop</title>
+</svelte:head>
+
 <Homepage />
 <ListProduct />

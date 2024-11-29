@@ -1,18 +1,14 @@
 <script>
+	import { MapPin } from 'lucide-svelte'
 	import '../app.css'
-	import { MapPin } from 'lucide-svelte' // Mengimpor ikon MapPin dari Lucide Svelte
-	let { children } = $props()
-	let isMenuOpen = false
 
-	function toggleMenu() {
-		isMenuOpen = !isMenuOpen
-	}
+	let { children } = $props()
 </script>
 
 <nav class="navbar bg-green-700">
 	<div class="navbar-content">
 		<div class="logo">
-			<span class="center-text">Archshop</span>
+			<a href="/" class="center-text">Archshop</a>
 		</div>
 		<div class="nav-links">
 			<a href="https://maps.app.goo.gl/kgx5chvb7YufQcsM9" class="nav-link">
@@ -93,7 +89,7 @@
 	}
 
 	.nav-link:hover {
-		color: #2f855a;
+		color: black;
 	}
 
 	.footer {
