@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
+	import { onMount } from 'svelte'
+	import { fly } from 'svelte/transition'
 
 	const itemsPerPage = 12
 
 	let currentPage = $state(1)
+	let animate = $state(false)
+	let delay = 150
 
 	let displayedProducts = $derived(
 		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 	)
+
+	onMount(() => (animate = true))
 </script>
 
 <svelte:head>
@@ -21,18 +27,24 @@
 	</div>
 
 	<div class="product-grid">
-		{#each displayedProducts as product}
-			<a class="card" href={`/product/${product.id}`}>
-				<div class="image-wrapper">
-					<img src={product.image} alt={product.title} class="product-image" />
-					<div class="cart-icon">
-						<ShoppingCart size="20" color="#333" />
+		{#each displayedProducts as product, i}
+			{#if animate}
+				<a
+					class="card"
+					href={`/product/${product.id}`}
+					in:fly={{ y: 100, duration: 1500, delay: delay * (i + 1) }}
+				>
+					<div class="image-wrapper">
+						<img src={product.image} alt={product.title} class="product-image" />
+						<div class="cart-icon">
+							<ShoppingCart size="20" color="#333" />
+						</div>
 					</div>
-				</div>
-				<div class="product-title">{product.title}</div>
-				<div class="product-price">{product.price}</div>
-				<div class="product-category">{product.category}</div>
-			</a>
+					<div class="product-title">{product.title}</div>
+					<div class="product-price">{product.price}</div>
+					<div class="product-category">{product.category}</div>
+				</a>
+			{/if}
 		{/each}
 	</div>
 </div>

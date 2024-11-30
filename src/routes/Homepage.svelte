@@ -1,20 +1,34 @@
 <script lang="ts">
 	import bg from '$lib/assets/homepage-kawasan.webp'
 	import image from '$lib/assets/image-gusdur.png'
+	import { onMount } from 'svelte'
+	import { fade } from 'svelte/transition'
+
+	let animate = $state(false)
+
+	onMount(() => (animate = true))
 </script>
 
 <section class="home">
 	<img class="background-image" src={bg} alt="Background" />
 	<div class="content">
-		<div class="image-side">
-			<img src={image} alt="" />
-		</div>
-		<div class="text-side">
-			<h1 class="title text-green-700">
-				Aneka Camilan,<br /> Dari Gus Dur
-			</h1>
-			<a href="/allproduct" class="buy-now-button text-center">Beli Sekarang</a>
-		</div>
+		{#if animate}
+			<div class="image-side" in:fade={{ duration: 1000 }}>
+				<img src={image} alt="" />
+			</div>
+			<div class="text-side">
+				<h1 class="title text-green-700" in:fade={{ duration: 1000, delay: 500 }}>
+					Aneka Camilan,<br /> Dari Gus Dur
+				</h1>
+				<a
+					href="/allproduct"
+					class="buy-now-button text-center"
+					in:fade={{ duration: 1000, delay: 1000 }}
+				>
+					Beli Sekarang
+				</a>
+			</div>
+		{/if}
 	</div>
 </section>
 

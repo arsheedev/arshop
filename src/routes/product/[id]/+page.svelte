@@ -1,11 +1,14 @@
 <script lang="ts">
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb'
-	import { products } from '$lib/data/products'
-	import { Box, Shield, ShoppingCart, Star, Truck, User } from 'lucide-svelte'
-	import Slash from 'lucide-svelte/icons/slash'
-	import type { PageData } from './$types'
+	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
+	import { products } from '$lib/data/products';
+	import { Box, Shield, ShoppingCart, Star, Truck, User } from 'lucide-svelte';
+	import Slash from 'lucide-svelte/icons/slash';
+	import { onMount } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
+	import type { PageData } from './$types';
 
-	let { data }: { data: PageData } = $props()
+	let { data }: { data: PageData } = $props();
+	let animate = $state(false);
 
 	let reviews = [
 		{
@@ -32,9 +35,12 @@
 				'Jajanan dari Gus Dur selalu menjadi pilihan keluarga saya. Semua produk yang dibeli selalu memuaskan!',
 			rating: 4
 		}
-	]
+	];
 
-	let recommendedProducts = products.slice(0, 4)
+	let reviewLength = reviews.length;
+	let recommendedProducts = products.slice(0, 4);
+
+	onMount(() => (animate = true));
 </script>
 
 <svelte:head>
@@ -64,45 +70,59 @@
 		</Breadcrumb.Root>
 
 		<div class="product-details">
-			<div class="product-image">
-				<img src={data.product.image} alt={data.product.title} class="product-image-element" />
-			</div>
+			{#if animate}
+				<div class="product-image" in:fade={{ duration: 1000 }}>
+					<img src={data.product.image} alt={data.product.title} class="product-image-element" />
+				</div>
+			{/if}
 
 			<div class="product-info">
-				<h1 class="product-title">{data.product.title}</h1>
-				<p class="product-description">{data.product.description}</p>
-				<div class="divider"></div>
-				<p class="product-price">Harga: {data.product.price}</p>
-				<div class="divider"></div>
+				{#if animate}
+					<h1 class="product-title" in:fly={{ y: -100, duration: 1000 }}>{data.product.title}</h1>
+					<p class="product-description" in:fade={{ duration: 1000, delay: 300 }}>
+						{data.product.description}
+					</p>
+					<div class="divider"></div>
+					<p class="product-price" in:fade={{ duration: 1000, delay: 600 }}>
+						Harga: {data.product.price}
+					</p>
+					<div class="divider"></div>
 
-				<!-- Icon Features -->
-				<div class="features">
-					<div class="feature-item">
-						<Truck class="feature-icon text-orange-500" />
-						<div>
-							<h3 class="feature-title">Gratis Ongkir</h3>
-							<p class="feature-description">Nikmati pengiriman gratis untuk produk ini.</p>
+					<!-- Icon Features -->
+					<div class="features">
+						<div class="feature-item" in:fly={{ x: 100, duration: 1000, delay: 900 }}>
+							<Truck class="feature-icon text-orange-500" />
+							<div>
+								<h3 class="feature-title">Gratis Ongkir</h3>
+								<p class="feature-description">Nikmati pengiriman gratis untuk produk ini.</p>
+							</div>
+						</div>
+						<div class="feature-item" in:fly={{ x: 100, duration: 1000, delay: 1200 }}>
+							<Box class="feature-icon text-orange-500" />
+							<div>
+								<h3 class="feature-title">Produk Berkualitas</h3>
+								<p class="feature-description">Diproduksi dengan bahan pilihan terbaik.</p>
+							</div>
+						</div>
+						<div class="feature-item" in:fly={{ x: 100, duration: 1000, delay: 1500 }}>
+							<Shield class="feature-icon text-orange-500" />
+							<div>
+								<h3 class="feature-title">Bergaransi</h3>
+								<p class="feature-description">Garansi 100% uang kembali jika tidak sesuai.</p>
+							</div>
 						</div>
 					</div>
-					<div class="feature-item">
-						<Box class="feature-icon text-orange-500" />
-						<div>
-							<h3 class="feature-title">Produk Berkualitas</h3>
-							<p class="feature-description">Diproduksi dengan bahan pilihan terbaik.</p>
-						</div>
-					</div>
-					<div class="feature-item">
-						<Shield class="feature-icon text-orange-500" />
-						<div>
-							<h3 class="feature-title">Bergaransi</h3>
-							<p class="feature-description">Garansi 100% uang kembali jika tidak sesuai.</p>
-						</div>
-					</div>
-				</div>
+				{/if}
 
 				<div class="buttons">
-					<button class="buy-button">Buy Now</button>
-					<button class="add-to-cart-button">Add to Cart</button>
+					{#if animate}
+						<button class="buy-button" in:fly={{ y: 100, duration: 1000, delay: 1800 }}
+							>Buy Now</button
+						>
+						<button class="add-to-cart-button" in:fly={{ x: 100, duration: 1000, delay: 2100 }}>
+							Add to Cart
+						</button>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -110,40 +130,48 @@
 		<!-- Reviews Section -->
 		<div class="reviews-section">
 			<h2 class="reviews-title">Reviews</h2>
-			{#each reviews as review (review.id)}
-				<div class="review-item">
-					<review.avatar class="review-icon text-gray-500" />
-					<div class="review-content">
-						<div class="review-name-rating">
-							<h3 class="review-name">{review.name}</h3>
+			{#each reviews as review, i (review.id)}
+				{#if animate}
+					<div class="review-item" in:fly={{ x: -100, duration: 1000, delay: 2400 + i * 300 }}>
+						<review.avatar class="review-icon text-gray-500" />
+						<div class="review-content">
+							<div class="review-name-rating">
+								<h3 class="review-name">{review.name}</h3>
 
-							<div class="review-rating">
-								{#each Array(review.rating) as _, index}
-									<Star class="star-icon text-yellow-500" />
-								{/each}
+								<div class="review-rating">
+									{#each Array(review.rating) as _, index}
+										<Star class="star-icon text-yellow-500" />
+									{/each}
+								</div>
 							</div>
+							<p class="review-text">{review.comment}</p>
 						</div>
-						<p class="review-text">{review.comment}</p>
 					</div>
-				</div>
-				<div class="divider"></div>
+					<div class="divider"></div>
+				{/if}
 			{/each}
 		</div>
 		<div class="recommended-products">
 			<h2 class="section-title">Rekomendasi Produk untuk Anda</h2>
 			<div class="product-grid">
-				{#each recommendedProducts as product}
-					<a class="card" href={`/product/${product.id}`}>
-						<div class="image-wrapper">
-							<img src={product.image} alt={product.title} class="product-image" />
-							<div class="cart-icon">
-								<ShoppingCart size="20" color="#333" />
+				{#each recommendedProducts as product, i}
+					{#if animate}
+						<a
+							class="card"
+							href={`/product/${product.id}`}
+							in:fly={{ y: 100, duration: 1000, delay: 2400 + reviewLength * 300 + i * 300 }}
+						>
+							<div class="image-wrapper">
+								<img src={product.image} alt={product.title} class="product-image" />
+								<div class="cart-icon">
+									<ShoppingCart size="20" color="#333" />
+								</div>
 							</div>
-						</div>
-						<div class="product-title-card">{product.title}</div>
-						<div class="product-price-card">{product.price}</div>
-						<div class="product-category">{product.category}</div>
-					</a>
+							<div class="product-title-card">{product.title}</div>
+							<div class="product-price-card">{product.price}</div>
+							<div class="product-category">{product.category}</div>
+						</a>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -363,14 +391,6 @@
 		cursor: pointer;
 	}
 
-	.placeholder-image {
-		width: 100%;
-		height: 250px;
-		background-color: #ddd;
-		border-radius: 5px;
-		margin-bottom: 10px;
-		position: relative;
-	}
 	.cart-icon {
 		position: absolute;
 		top: 10px;

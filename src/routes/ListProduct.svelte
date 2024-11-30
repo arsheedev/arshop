@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button'
+	import { buttonVariants } from '$lib/components/ui/button'
 	import { products } from '$lib/data/products'
 	import { ShoppingCart } from 'lucide-svelte'
+	import { onMount } from 'svelte'
+	import { fly } from 'svelte/transition'
 
 	const itemsPerPage = 12
 	const totalPages = Math.ceil(products.length / itemsPerPage)
 
 	let currentPage = $state(1)
+	let animate = $state(false)
+	let delay = 150
 
 	function goToPage(page: number) {
 		currentPage = page
@@ -15,27 +19,43 @@
 	let displayedProducts = $derived(
 		products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 	)
+
+	onMount(() => (animate = true))
 </script>
 
 <div class="container">
 	<div class="header">
-		<div class="title">Oleh-Oleh untuk Anda</div>
-		<Button class="bg-green-700 hover:bg-green-800" href="/allproduct">Lihat Semua Produk</Button>
+		{#if animate}
+			<div class="title" in:fly={{ x: -100, duration: 1000 }}>Oleh-Oleh untuk Anda</div>
+			<a
+				class={buttonVariants({ class: 'w-44 bg-green-700 hover:bg-green-800' })}
+				href="/allproduct"
+				in:fly={{ x: 100, duration: 1000 }}
+			>
+				Lihat Semua Produk
+			</a>
+		{/if}
 	</div>
 
 	<div class="product-grid">
-		{#each displayedProducts as product}
-			<a class="card" href={`/product/${product.id}`}>
-				<div class="image-wrapper">
-					<img src={product.image} alt={product.title} class="product-image" />
-					<div class="cart-icon">
-						<ShoppingCart size="20" color="#333" />
+		{#each displayedProducts as product, i}
+			{#if animate}
+				<a
+					class="card"
+					href={`/product/${product.id}`}
+					in:fly={{ y: 100, duration: 1500, delay: delay * (i + 1) }}
+				>
+					<div class="image-wrapper">
+						<img src={product.image} alt={product.title} class="product-image" />
+						<div class="cart-icon">
+							<ShoppingCart size="20" color="#333" />
+						</div>
 					</div>
-				</div>
-				<div class="product-title">{product.title}</div>
-				<div class="product-price">{product.price}</div>
-				<div class="product-category">{product.category}</div>
-			</a>
+					<div class="product-title">{product.title}</div>
+					<div class="product-price">{product.price}</div>
+					<div class="product-category">{product.category}</div>
+				</a>
+			{/if}
 		{/each}
 	</div>
 
